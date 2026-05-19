@@ -21,6 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "flash_layout.h"
 
 /* USER CODE END Includes */
 
@@ -76,6 +77,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
+  SCB->VTOR = APP_ADDR;   // Add This
 
   /* USER CODE END Init */
 

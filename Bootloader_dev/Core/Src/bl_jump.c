@@ -39,7 +39,7 @@ void jumpToApplication(void){
     //Set main stack pointer
 
     __set_MSP(appStack);
-
+    __enable_irq();
     // Jump to application reset handler
     appEntry();
 
