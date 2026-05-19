@@ -1,0 +1,19 @@
+19:14:12 **** Incremental Build of configuration Debug for project application ****
+make -j8 all 
+arm-none-eabi-gcc -o "application.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\ST\STM_Projects\application\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="application.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: application.elf
+ 
+arm-none-eabi-size  application.elf 
+arm-none-eabi-objdump -h -S application.elf  > "application.list"
+arm-none-eabi-objcopy  -O binary application.elf  "application.bin"
+   text	   data	    bss	    dec	    hex	filename
+   8568	     12	   1644	  10224	   27f0	application.elf
+Finished building: default.size.stdout
+ 
+Finished building: application.list
+ 
+Finished building: application.bin
+ 
+
+19:14:13 Build Finished. 0 errors, 0 warnings. (took 1s.230ms)
+

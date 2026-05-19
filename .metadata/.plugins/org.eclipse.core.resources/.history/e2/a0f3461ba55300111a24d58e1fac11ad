@@ -21,7 +21,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "flash_layout.h"
 
 /* USER CODE END Includes */
 
@@ -78,6 +77,7 @@ int main(void)
 
   /* USER CODE BEGIN Init */
   SCB->VTOR = APP_ADDR;   // Add This
+  __enable_irq();   // Add This
 
   /* USER CODE END Init */
 
@@ -93,8 +93,6 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
-  HAL_UART_Transmit(&huart1, "Inside Application", 22, 100);
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -102,8 +100,6 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_1);
-	  HAL_Delay(500);
 
     /* USER CODE BEGIN 3 */
   }
