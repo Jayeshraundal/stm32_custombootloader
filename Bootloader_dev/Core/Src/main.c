@@ -21,6 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <string.h>
 #include "bl_jump.h"
 /* USER CODE END Includes */
 
@@ -91,9 +92,25 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
+  char msg[] = "Inside Bootloader!!\r\n";
+
   HAL_Delay(3000);
 
-  HAL_UART_Transmit(&huart2, (uint8_t *)"Inside Bootloader!!\r\n", 21, 100);
+  HAL_UART_Transmit(&huart2,
+                    (uint8_t*)msg,
+                    strlen(msg),
+                    HAL_MAX_DELAY);
+
+  HAL_Delay(100);
+
+  /* Clean everything before jump */
+  HAL_UART_DeInit(&huart2);
+
+  HAL_RCC_DeInit();
+
+  HAL_DeInit();
+
+  __disable_irq();
 
   jumpToApplication();
 
