@@ -16,3 +16,4 @@ Bootloader_dev/Release/
 # OS files
 Thumbs.db
 .DS_Store
+.metadata
