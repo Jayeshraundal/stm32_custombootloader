@@ -21,6 +21,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <string.h>
+
 #include "flash_layout.h"
 
 /* USER CODE END Includes */
@@ -92,7 +94,12 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
-  HAL_UART_Transmit(&huart2, "Inside Application", 22, 100);
+  char msg[] = "Inside Application!!\r\n";
+
+    HAL_UART_Transmit(&huart2,
+                      (uint8_t*)msg,
+                      strlen(msg),
+                      HAL_MAX_DELAY);
 
   /* USER CODE END 2 */
 
