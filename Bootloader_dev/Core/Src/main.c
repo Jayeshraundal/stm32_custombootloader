@@ -94,8 +94,6 @@ int main(void)
 
   char msg[] = "Inside Bootloader!!\r\n";
 
-  HAL_Delay(3000);
-
   HAL_UART_Transmit(&huart2,
                     (uint8_t*)msg,
                     strlen(msg),

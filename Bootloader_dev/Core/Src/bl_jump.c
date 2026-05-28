@@ -37,7 +37,7 @@ void jumpToApplication(void){
 	SysTick->VAL  = 0;
 
     //Set main stack pointer
-
+	SCB->VTOR = APP_ADDR;
     __set_MSP(appStack);
     __enable_irq();
     // Jump to application reset handler
