@@ -45,3 +45,22 @@ void jumpToApplication(void){
     appEntry();
 
 }
+
+
+int bootloader_is_app_valid(void)
+{
+	uint32_t HDR_ADDR = APP_HEAD_ADDR;
+    const app_header_t *app_hdr = (const app_header_t *)HDR_ADDR;
+
+    /* Magic */
+    if (app_hdr->magic != APP_MAGIC)
+        return 1;
+
+    /* Reset handler sanity */
+    uint32_t reset_handler = *(uint32_t *)(APP_ADDR + 4);
+    if ((reset_handler & 0xFF000000) != 0x08000000)
+        return 2;
+
+    return 0;   // VALID
+}
+
