@@ -44,8 +44,9 @@ _Min_Stack_Size = 0x400; /* required amount of stack */
 /* Memories definition */
 MEMORY
 {
-  RAM    (xrw)    : ORIGIN = 0x20000000,   LENGTH = 128K
-  FLASH    (rx)    : ORIGIN = 0x0800C000,   LENGTH = 480K
+  RAM    		(xrw)        : ORIGIN = 0x20000000,   LENGTH = 32K
+  APP_HEAD_ADDR (rw)		 : ORIGIN = 0x08008000;   LENGTH = 16K	
+  FLASH    		(rx)         : ORIGIN = 0x0800C000,   LENGTH = 464K
 }
 
 /* Sections */
@@ -185,4 +186,11 @@ SECTIONS
   }
 
   .ARM.attributes 0 : { *(.ARM.attributes) }
+  
+  	.header :
+	{
+	KEEP(*(.header))
+	} >APP_HEAD_ADDR
 }
+
+

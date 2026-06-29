@@ -11,6 +11,7 @@
 
 #include "flash_layout.h"
 
+
 typedef struct {
 
 	uint32_t otaflag;

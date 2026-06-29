@@ -101,6 +101,12 @@ int main(void)
 
   HAL_Delay(100);
 
+  if (bootloader_is_app_valid()!= 0)
+    {
+    	HAL_UART_Transmit(&huart2,(uint8_t*)"Failed to Jump!!\r\n", 18, 100);
+    }
+
+
   /* Clean everything before jump */
   HAL_UART_DeInit(&huart2);
 
