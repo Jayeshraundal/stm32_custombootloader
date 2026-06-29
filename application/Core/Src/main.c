@@ -24,6 +24,7 @@
 #include <string.h>
 
 #include "flash_layout.h"
+#include "app_header.h"
 
 /* USER CODE END Includes */
 
@@ -54,6 +55,17 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
+
+
+__attribute__((section(".header")))const app_header_t app_hdr =
+{
+	.otaflag = 0,
+	.magic = 0xABCDEFAB,
+	.size = 0,
+	.crc = 0,
+	.version =0,
+};
+
 
 /* USER CODE END PFP */
 
@@ -101,6 +113,11 @@ int main(void)
                       strlen(msg),
                       HAL_MAX_DELAY);
 
+    if (bootloader_is_app_valid()!= 0){
+
+    	HAL_UART_Transmit(&huart2,(uint8_t*)"Failed to Jump!!\r\n", 18, 100)
+    }
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -108,7 +125,8 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_4);
+	  HAL_Delay(100);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

@@ -10,6 +10,7 @@
 #include "flash_layout.h"
 #include "app_header.h"
 
+#define APP_MAGIC    0xABCDEFAB
 
 // function as pointer for appEntry
 typedef void (*pFunction) (void);
