@@ -9,6 +9,7 @@
 #include "bl_jump.h"
 #include "flash_layout.h"
 #include "app_header.h"
+#include "crc32.h"
 
 #define APP_MAGIC    0xABCDEFAB
 
@@ -61,6 +62,17 @@ int bootloader_is_app_valid(void)
     uint32_t reset_handler = *(uint32_t *)(APP_ADDR + 4);
     if ((reset_handler & 0xFF000000) != 0x08000000)
         return 2;
+
+    /* 3. Size sanity */
+    if (app_hdr->size == 0 || app_hdr->size > APP_MAX_SIZE)
+        return 3;
+
+    /* 4. CRC check */
+    uint32_t calc_crc =
+        crc32((const uint8_t *)APP_ADDR, app_hdr->size);
+
+    if (calc_crc != app_hdr->crc)
+        return 4;
 
     return 0;   // VALID
 }

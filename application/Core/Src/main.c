@@ -62,8 +62,8 @@ __attribute__((section(".header"))) const app_header_t app_hdr =
 {
 	.otaflag = 0,
 	.magic = 0xABCDEFAB,
-	.size = 0,
-	.crc = 0,
+	.size = 9464,
+	.crc = 0x2544FC5E,
 	.version = 0,
 };
 
